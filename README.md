@@ -30,7 +30,7 @@ A modern, responsive React application for managing browser extensions. Easily t
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/browser-extensions-manager.git
+git clone https://github.com/dev-Vortex51/browser-extensions-manager.git
 cd browser-extensions-manager
 
 # Install dependencies
