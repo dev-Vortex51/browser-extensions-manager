@@ -1,5 +1,6 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { extensions } from "../Constants/helper";
+import { useSearchParams } from "react-router-dom";
 
 export interface Extension {
   id: number;
@@ -28,16 +29,20 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | null>(null);
 
 const AppProvider = ({ children }: ChildrenProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [allExtensions, setAllExtensions] = useState<Extension[]>(extensions); // original full list
   const [extension, setExtension] = useState<Extension[]>(extensions); // filtered list
   const [active, setActive] = useState<string>("All");
 
-  const handleActive = (
-    label: string,
-    baseList: Extension[] = allExtensions
-  ) => {
+  useEffect(() => {
+    setSearchParams({ filter: "all" });
+  }, []);
+
+  const handleActive = (label: string, baseList = allExtensions) => {
     setActive(label);
+    setSearchParams({ filter: label.toLowerCase() });
+
     if (label === "All") {
       setExtension(baseList);
     } else if (label === "Active") {
