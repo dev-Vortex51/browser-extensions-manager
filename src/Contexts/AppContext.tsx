@@ -29,7 +29,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | null>(null);
 
 const AppProvider = ({ children }: ChildrenProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [allExtensions, setAllExtensions] = useState<Extension[]>(extensions); // original full list
   const [extension, setExtension] = useState<Extension[]>(extensions); // filtered list
